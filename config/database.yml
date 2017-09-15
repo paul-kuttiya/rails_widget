@@ -1,0 +1,17 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: rails_widget_dev
+  host: localhost
+  pool: 5
+  username: pkuttiya
+  password: p053851238
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: rails_widget_test
+  host: localhost
+  pool: 5
+  username: pkuttiya
+  password: p053851238
