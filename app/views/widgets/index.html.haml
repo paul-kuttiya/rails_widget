@@ -1,0 +1,33 @@
+.search-index
+  %form.form-horizontal#flight
+    %fieldset
+      .form-group#from.col-xs-4.col-md-4
+        %label.control-label{for: "from"} Flying from
+        %input.form-control{name: "from", placeholder: "City", type: "text"}        
+      .form-group#to.col-xs-4.col-md-4
+        %label.control-label{for: "to"} Flying to
+        %input.form-control{name: "to", placeholder: "City", type: "text"}
+    %fieldset
+      .form-group#adult.col-xs-4.col-md-4
+        %label.control-label{for: "adult"} Adults (18+)
+        %select#select.form-control{name: "adult"}
+          %option{value: 1} 1
+          %option{value: 2} 2
+          %option{value: 3} 3
+          %option{value: 4} 4
+          %option{value: 5} 5
+          %option{value: 6} 6            
+      .form-group#children.col-xs-4.col-md-4
+        %label.control-label{for: "children"} Children (0-17)
+        %select#select.form-control{name: "children"}
+          %option{value: 0} 0        
+          %option{value: 1} 1
+          %option{value: 2} 2
+          %option{value: 3} 3
+          %option{value: 4} 4
+          %option{value: 5} 5
+          %option{value: 6} 6  
+    %fieldset
+      .form-group
+        .col-md-12
+          %button.btn.btn-primary{type: "submit"} Search
