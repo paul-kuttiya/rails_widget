@@ -13,30 +13,53 @@
 //font-awesome
 @import "font-awesome"
 
+.col-md-8
+  padding: 0
+
+#flight-index
+  margin: 0 auto
+
+ul
+  list-style: none
+  padding: 0
+
 .search-index
   width: 80%
-  label
-    font-weight: bold
-    padding-bottom: .5em
-  .form-group
-    margin-right: .5em
-  #from, #to , #date 
-    width: 25%
-  #adult, #children
-    width: auto
-  #date
-    #datetimepicker1
-      position: relative
-      label
-        display: inline-block
-        width: 100%
-        text-align: left
-      input
-        width: 80%
-      span.input-group-addon
-        width: 20%
-        height: 51%
-        position: absolute
-        bottom: 0
-        right: 0
-        z-index: 100
+  margin: 0 auto
+  padding: 2em 0
+  #flight
+
+  #search-results, form
+    margin: 0 auto
+    width: 70%
+
+  form
+    margin-bottom: 2em
+    border: 1px solid #eee
+    padding: 1em
+      
+    label
+      font-weight: bold
+      padding-bottom: .5em
+    .form-group
+      margin-right: .5em
+    #from, #to , #date 
+      width: 50%
+    #adult, #children
+      width: auto
+    #date
+      #datetimepicker1
+        position: relative
+        label
+          display: inline-block
+          width: 100%
+          text-align: left
+        input
+          width: 80%
+        span.input-group-addon
+          width: 20%
+          height: 51%
+          position: absolute
+          bottom: 0
+          right: 0
+          z-index: 100

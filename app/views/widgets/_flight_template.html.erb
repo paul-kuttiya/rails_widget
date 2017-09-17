@@ -1,9 +1,32 @@
 <script id="flight-template" type="text/x-handlebars-template">
-  <li class="ticket">
-    <p>{{Adult}}</p>
-    <p>{{Child}}</p>
-    <p>{{Departport}}</p>
-    <p>{{Arriveport}}</p>
-    <p>{{Duration}}</p>
+  <li class="panel panel-default">
+    <div class="panel-heading clearfix">
+      <div class="fare pull-left">
+        <p>Adult: {{Adult}} USD</p>
+        <p>Children: {{Child}} USD</p>
+      </div>
+      <div class="book pull-right">
+        <button class="btn btn-warning">
+          Book
+        </button>
+      </div>
+    </div>
+    
+    <div class="panel-body flight-info clearfix">
+      <div class="pull-left departing">
+        <h4>Departing</h4>
+        <h5>Airline: {{InAirline}}</h5>        
+        <p>From: {{InDepartport}}</p>
+        <p>To: {{InArriveport}}</p>
+        <p>Duration: {{InDuration}} hours</p>
+      </div>
+      <div class="pull-right returning">
+        <h4>Returning</h4>
+        <h5>Airline: {{OutAirline}}</h5>                
+        <p>From: {{OutDepartport}}</p>
+        <p>To: {{OutArriveport}}</p>
+        <p>Duration: {{OutDuration}} hours</p>
+      </div>
+    </div>
   </li>
 </script>

@@ -102,14 +102,30 @@ document.addEventListener("turbolinks:load", function() {
         // console.log("flightArrays")        
         // console.log(flightArrays)        
         // console.log("flights")
-        console.log(flights.splice(0, 20))
-        flights.splice(0, 20).forEach(function(flight) {
+        var flightsData = flights.splice(0, 10);
+        console.log(flightsData)
+        flightsData.forEach(function(flight) {
           //handlebars
-          var context = {Adult: flight.Adult},
-              html    = template(context);
+          var context = {
+            Adult: flight.Adult,
+            Child: flight.Child,
+            //In
+            InAirline: flight.inbound[0].OperatedByAirline.CompanyText,
+            InDepartport: flight.inbound[0].DepartureAirport.LocationCode,
+            InArriveport: flight.inbound[0].ArrivalAirport.LocationCode,
+            InDuration: parseInt(flight.inbound[0].FlightDuration, 10),
+            InAirline: flight.inbound[0].OperatedByAirline.CompanyText,
+            //Out
+            OutAirline: flight.outbound[0].OperatedByAirline.CompanyText,
+            OutDepartport: flight.outbound[0].DepartureAirport.LocationCode,
+            OutArriveport: flight.outbound[0].ArrivalAirport.LocationCode,
+            OutDuration: parseInt(flight.outbound[0].FlightDuration, 10),
+          };
+              
+          var html    = template(context);
 
           $('#search-results').append(html);
-          debugger
+          // debugger
         });
 
         $.ajax({

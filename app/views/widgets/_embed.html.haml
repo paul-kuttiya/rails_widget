@@ -1,4 +1,9 @@
 %link{href: "#{File.join(root_url, 'assets', 'widgets.css')}", rel: "stylesheet", type: "text/css"}
 %script{src: "#{File.join(root_url, 'assets','widget.js')}", type: "text/javascript"}
 
-%h1.alert.alert-danger you
+.search-index
+  = render "flight_form"
+
+  %ul#search-results
+
+= render "flight_template"
