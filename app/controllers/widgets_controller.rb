@@ -7,7 +7,14 @@ class WidgetsController < ApplicationController
   end
 
   def create
-    # Record.create(params)
+    # binding.pry
+    # Record.create(
+    #   to: params[:flightParams]["to"], from: params[:flightParams]["from"],
+    #   depart: params[:flightParams]["depart"],
+    #   return: params[:flightParams]["return"],
+    #   adult: params[:flightParams]["adult"],
+    #   children: params[:flightParams]["children"]
+    #   )
     redirect_to root_path
   end
 end
