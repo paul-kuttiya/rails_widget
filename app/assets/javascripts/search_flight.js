@@ -16,10 +16,10 @@ document.addEventListener("turbolinks:load", function() {
     
     JsonParams = {"ResponseVersion": "VERSION41",
       "FlightSearchRequest": {
-      // "Adults": flightParams.adult,
-      "Adults": "1",
-      // "Child": flightParams.children,
-      "Child": "2",      
+      "Adults": flightParams.adult,
+      // "Adults": "1",
+      "Child": flightParams.children,
+      // "Child": "2",      
       "ClassOfService": "ECONOMY",
       "InfantInLap": "0",
       "InfantOnSeat": "0",
@@ -28,22 +28,22 @@ document.addEventListener("turbolinks:load", function() {
       "SegmentDetails": 
         [
           { //outbound flight
-            // "DepartureDate": flightParams.depart, //"2017-09-29"
-            "DepartureDate": "2017-09-29", //"2017-09-29"
+            "DepartureDate": flightParams.depart, //"2017-09-29"
+            // "DepartureDate": "2017-09-29", //"2017-09-29"
             "DepartureTime": "0000",
-            "Destination": "NYC", //from "NYC"
-            // "Destination": flightParams.from, //from "NYC"
-            // "Origin": flightParams.to //to "BKK"
-            "Origin": "PAR" //to "PAR"            
+            "Destination": flightParams.from, //from "NYC"
+            "Origin": flightParams.to //to "BKK"
+            // "Destination": "NYC", //from "NYC"
+            // "Origin": "PAR" //to "PAR"            
           },
           { //return flight
-            "DepartureDate": "2017-10-10", //"2017-10-10"
-            // "DepartureDate": flightParams.return, //"2017-10-10"            
+            // "DepartureDate": "2017-10-10", //"2017-10-10"
+            "DepartureDate": flightParams.return, //"2017-10-10"            
             "DepartureTime": "0000",
-            "Destination": "PAR", //from "NYC"
-            "Origin": "NYC" //to "PAR"   
-            // "Destination": flightParams.to, //from BKK
-            // "Origin": flightParams.from //to NYC
+            // "Destination": "PAR", //from "NYC"
+            // "Origin": "NYC" //to "PAR"   
+            "Destination": flightParams.to, //from BKK
+            "Origin": flightParams.from //to NYC
           }
         ]
       }
@@ -122,6 +122,23 @@ document.addEventListener("turbolinks:load", function() {
             OutDuration: parseInt(flight.outbound[0].FlightDuration, 10),
           };
               
+          if (flight.inbound[1]) {
+            //In 1
+            context.InAirline1 = flight.inbound[1].OperatedByAirline.CompanyText;
+            context.InDepartport1 = flight.inbound[1].DepartureAirport.LocationCode;
+            context.InArriveport1 = flight.inbound[1].ArrivalAirport.LocationCode;
+            context.InDuration1 = parseInt(flight.inbound[1].FlightDuration, 10);
+            context.InAirline1 = flight.inbound[1].OperatedByAirline.CompanyText;
+          }
+
+          if (flight.outbound[1]) {
+            //Out 1
+            context.OutAirline1 = flight.outbound[1].OperatedByAirline.CompanyText;
+            context.OutDepartport1 = flight.outbound[1].DepartureAirport.LocationCode;
+            context.OutArriveport1 = flight.outbound[1].ArrivalAirport.LocationCode;
+            context.OutDuration1 = parseInt(flight.outbound[1].FlightDuration, 10);
+          }
+
           var html    = template(context);
 
           $('#search-results').append(html);

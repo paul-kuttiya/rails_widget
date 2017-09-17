@@ -3,7 +3,9 @@
     <div class="panel-heading clearfix">
       <div class="fare pull-left">
         <p>Adult: {{Adult}} USD</p>
-        <p>Children: {{Child}} USD</p>
+        {{#if Child}}
+          <p>Children: {{Child}} USD</p>
+        {{/if}}
       </div>
       <div class="book pull-right">
         <button class="btn btn-warning">
@@ -19,6 +21,13 @@
         <p>From: {{InDepartport}}</p>
         <p>To: {{InArriveport}}</p>
         <p>Duration: {{InDuration}} hours</p>
+        {{#if InAirline1}}
+          <hr>
+          <h5>Airline: {{InAirline1}}</h5>        
+          <p>From: {{InDepartport1}}</p>
+          <p>To: {{InArriveport1}}</p>
+          <p>Duration: {{InDuration1}} hours</p>
+        {{/if}}
       </div>
       <div class="pull-right returning">
         <h4>Returning</h4>
@@ -26,6 +35,13 @@
         <p>From: {{OutDepartport}}</p>
         <p>To: {{OutArriveport}}</p>
         <p>Duration: {{OutDuration}} hours</p>
+        {{#if OutAirline1}}
+          <hr>
+          <h5>Airline: {{OutAirline1}}</h5>        
+          <p>From: {{OutDepartport1}}</p>
+          <p>To: {{OutArriveport1}}</p>
+          <p>Duration: {{OutDuration1}} hours</p>
+        {{/if}}
       </div>
     </div>
   </li>
