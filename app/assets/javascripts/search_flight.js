@@ -1,5 +1,10 @@
 document.addEventListener("turbolinks:load", function() {
+  //handlebars
+  var source   = $("#flight-template").html();
+  var template = Handlebars.compile(source);
+
   $('form#flight').on("submit", function(e) {
+    $('#search-results').empty()
     e.preventDefault();
     flightParams = {};
     
@@ -11,8 +16,10 @@ document.addEventListener("turbolinks:load", function() {
     
     JsonParams = {"ResponseVersion": "VERSION41",
       "FlightSearchRequest": {
-      "Adults": flightParams.adult,
-      "Child": flightParams.children,
+      // "Adults": flightParams.adult,
+      "Adults": "1",
+      // "Child": flightParams.children,
+      "Child": "2",      
       "ClassOfService": "ECONOMY",
       "InfantInLap": "0",
       "InfantOnSeat": "0",
@@ -21,20 +28,28 @@ document.addEventListener("turbolinks:load", function() {
       "SegmentDetails": 
         [
           { //outbound flight
-            "DepartureDate": flightParams.depart, //"2017-09-29"
+            // "DepartureDate": flightParams.depart, //"2017-09-29"
+            "DepartureDate": "2017-09-29", //"2017-09-29"
             "DepartureTime": "0000",
-            "Destination": flightParams.from, //from "NYC"
-            "Origin": flightParams.to //to "BKK"
+            "Destination": "NYC", //from "NYC"
+            // "Destination": flightParams.from, //from "NYC"
+            // "Origin": flightParams.to //to "BKK"
+            "Origin": "PAR" //to "PAR"            
           },
           { //return flight
-            "DepartureDate": flightParams.return, //"2017-10-10"
+            "DepartureDate": "2017-10-10", //"2017-10-10"
+            // "DepartureDate": flightParams.return, //"2017-10-10"            
             "DepartureTime": "0000",
-            "Destination": flightParams.to, //from BKK
-            "Origin": flightParams.from //to NYC
+            "Destination": "PAR", //from "NYC"
+            "Origin": "NYC" //to "PAR"   
+            // "Destination": flightParams.to, //from BKK
+            // "Origin": flightParams.from //to NYC
           }
         ]
       }
     };
+
+    var flights = []
 
     $.ajax({
       method: "POST",
@@ -50,8 +65,8 @@ document.addEventListener("turbolinks:load", function() {
             destinations = endpoint.OriginDestinationOptions,
             inbounds = destinations.InBoundOptions.InBoundOption,
             outbounds = destinations.OutBoundOptions.OutBoundOption,
-            flightArrays = endpoint.SegmentReference.RefDetails
-            flights = []
+            flightArrays = endpoint.SegmentReference.RefDetails;
+            
             flightArrays.forEach(function(flight) {
               var inboundId = flight.InBoundOptionId[0],
                   outboundId = flight.OutBoundOptionId[0];
@@ -69,10 +84,10 @@ document.addEventListener("turbolinks:load", function() {
                 }
               });
 
-              flightJson.Adult = flight.PTC_FareBreakdown.Adult.TotalAdultFare;
+              flightJson.Adult = Math.round(flight.PTC_FareBreakdown.Adult.TotalAdultFare);
                   
               if (flight.PTC_FareBreakdown.Child !== null) {
-                flightJson.Child = flight.PTC_FareBreakdown.Child.TotalChildFare;
+                flightJson.Child = Math.round(flight.PTC_FareBreakdown.Child.TotalChildFare);
               }
 
               flights.push(flightJson);
@@ -87,19 +102,23 @@ document.addEventListener("turbolinks:load", function() {
         // console.log("flightArrays")        
         // console.log(flightArrays)        
         // console.log("flights")
-        console.log(flights)
-        // debugger
+        console.log(flights.splice(0, 20))
+        flights.splice(0, 20).forEach(function(flight) {
+          //handlebars
+          var context = {Adult: flight.Adult},
+              html    = template(context);
+
+          $('#search-results').append(html);
+          debugger
+        });
+
         $.ajax({
           url: "/widgets",
           type: "POST",
           data: {
             flightParams: flightParams,
-            flights: flights.splice(0, 20)
           },
           dataType: "json",
-          success: function(data) {
-              alert('successfully');
-            }
           });
       },
       error: function(error) {

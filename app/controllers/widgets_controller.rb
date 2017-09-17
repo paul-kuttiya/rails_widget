@@ -3,7 +3,11 @@ class WidgetsController < ApplicationController
   layout false
   layout 'application', except: :flight
 
+  def index
+  end
+
   def create
-    binding.pry
+    # Record.create(params)
+    redirect_to root_path
   end
 end

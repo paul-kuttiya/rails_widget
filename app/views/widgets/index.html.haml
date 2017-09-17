@@ -1,5 +1,5 @@
 .search-index
-  %form.form-horizontal#flight
+  %form.form-horizontal#flight{method: "POST", action: "/widgets"}
     %fieldset
       .form-group#from.col-xs-4.col-md-4
         %label.control-label{for: "from"} Flying from
@@ -44,3 +44,7 @@
       .form-group
         .col-md-12
           %button.btn.btn-primary{type: "submit"} Search
+
+#search-results
+  
+= render "flight_template"
