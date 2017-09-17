@@ -20,7 +20,23 @@
     padding-bottom: .5em
   .form-group
     margin-right: .5em
-  #from, #to  
+  #from, #to , #date 
     width: 25%
   #adult, #children
     width: auto
+  #date
+    #datetimepicker1
+      position: relative
+      label
+        display: inline-block
+        width: 100%
+        text-align: left
+      input
+        width: 80%
+      span.input-group-addon
+        width: 20%
+        height: 51%
+        position: absolute
+        bottom: 0
+        right: 0
+        z-index: 100
